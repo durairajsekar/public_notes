@@ -1,0 +1,118 @@
+----- BEAN ----
+$ How to do java bean validation?
+  - @Valid should be on top of object to enable validation on the fields.
+  - If in need for a custom validation create a @Intefrace for CustomValditor and provide an implementation in isValid() method.
+
+----- OOPS ----
+$ What is inheritance?
+  - Inheritance allows a class to be associated with another class in a way to inherit it's method and properties.
+  - extends keyword can be used for inheritance.
+
+$ What is effect of final keyword in field, in mehtod and in class?
+  -- Class: final class cannot have sub-class (it cannot be extended by any other class).
+  -- Field: final field should be initialized while being declared and once assigned with a value cannot be re-assigned/set with a new value.
+  -- Method: final method cannot be overridden and given a new implementation by sub-class.
+
+$ Which one is efficient for insertions, read, update, and delete between ArrayList and LinkedList?
+  -- Insertions: LinkedList for inserting at beginning and end. ArrayList at end.
+  -- Read: ArrayList
+  -- Update: ArrayList
+  -- Delete: LinkedList for deleting at beginning and end. ArrayList at end.
+
+$ Difference between Date class from java.util and java.time classes?
+  Date from java.util -- Mutable class, not thread safe, Can't make complex operation without help of Calendar class, limited methods available, no time zone.
+  Date from java.time -- Immutable class, thread safe, can make complex operation, has time zone (ZonedTime) other eg. LocalDate, LocalTime, LocalDateTime.
+
+$ What is functional interface?
+  -- Interface having one abstract methods are called functional interface.
+  -- Functional interface can have other methods like default, static methods, but one abstract methods. (methods need not have abstract keyword, it is implicit in interface)
+  -- implementation can be provided to abstract methods using lambda expression and invoked via instance of functional interface.
+
+$ 
+
+$ Why is the clone method protected?
+  - Clone method allows to create a copy of the object. To make an object eligible for clonning a class, it should implements Clonenable marker interface else CloneNotSupportedException will be thrown.
+  - Purpose of implementing marker interface is just to show the intent of the class. Class implementing Clonenable need to provide implementation for clone() method to make copy.
+  - Protected access modifier is used to for clone mehtod in Object class to ensure that the object which are sub class of the class an clone and restrict other classes from cloneing.
+  - Shallow copy: Shallow copy duplicates the object but not the fields in the object.
+  - Deep copy: Deep coply duplicates the object and the field in the object.
+
+$ What is the return type of put method in HashMap?
+  - Returns the previous value if the key has one, else returns null.
+
+$ How HashSet works?
+  - Works similar to HashMap with one difference. Value would be null or constant.
+
+$ What is the diff. b/w collection api and stream api?
+  - Collection objects are mutable and operations are immediate. Eg. add to a list.
+  - Stream API doesn't alter the original collection, instead it creates a new stream. Lazy initialization of intermediate operation until terminal operation is invoked.
+
+$ What are collection interface and classes?
+  - Interface: List, Set, Map, Queue
+  - Class: ArrayList, HashSet, TreeSet, TreeMap, HashMap, PriorityQueue
+
+$ Where are static variables stored in memory?
+  - static variables are stored in method area of heap memory.
+  - static variables are not specific to class instance or thread hence keeping them in stack memory is not a good idea.
+  - When heap memory is exhausted and can't allocate for a new varaible, then OutOfMemory ERROR is thrown.
+
+
+$ Where are local variables stored in memory?
+  - local variables are specific to class instance or thread hence it should be available in stack memory.
+  - local variables are cleared when the stack frame is destroyed.
+  - When stack memory is exhausted due to infinite loop, then StackOverFlowException is thrown.
+
+----- API ------
+$ Explain Idempotent methods?
+  - PUT and DELETE are idempotent methods.
+  - Change in state of resource will be same for one hit or more than one hit.
+
+
+----- HIBERNATE -----
+1. What is fetchType in hibernate?
+  Tells when to load the data into memory. 
+  LAZY - Associate objects are given a proxy and is loaded into memory only while accessing the associate object. Will need N+1 query to DB.
+  EAGER - Associate objects are loaded at the time loading the parent object. Will need one query with OUTER JOIN.
+
+2. What is fetchMode in hibernate?
+  Tells how to query the data from DB.
+  JOIN - Uses OUTER JOIN to load the associate objects along with parent object.
+  SELECT - Loads parent object with single query and then loads associate objects with seperate query for each associate object.
+  SUBSELECT - Loads parent object with single query and then loads associate objects with singe query for all associate object.
+  BATCH -  Optimization startergy for SELECT fetchMode.
+
+3. What is N+1 problem in hiberate?
+  When a parent object is queried which contains associate object, seperate query is needed to fetch associate object.
+
+4. What is the solution for N+1 problem in hibernate?
+  When associate objects are accessed frequently, fetchMode JOIN can be used with fetchType EAGER.
+  When associate objects are not needed, JPA projections can be used to load only the fields of parent object.
+
+5. What is the default fetch type for oneToMany, oneToOne, ManyToOne ? 
+  oneToMany - LAZY is the default fetch type.
+  oneToOne - EAGER is the default fetch type.
+  ManyToOne - EAGER is the default fetch type.
+
+6. What happens, when fetchType LAZY and fetchMode JOIN is used on associated object?
+  fetchType takes precidence over fetchMode. associated object would be loaded lazily.
+
+7. What is the default orphanRemoval startergy in oneToMany?
+  false.  
+
+8. What is first level cache in hibernate?
+  Cache within the same session is called first level cache. cache is stored in hibernate cache.
+
+9. What is second level cache in hibernate?
+  Cache b/w session is called second level cache. Hibernate does not provide this. External cache is used to store it.
+  Cache stratergy can be tuned with configuration provided by cache provider. Eg. ehcache, infispan.
+
+10. What is role of sessionFactory in hibernate?
+  SessionFactory is used to store the cache b/w sessions.
+  It is a singleton bean and is shared by all session instances.
+
+. What is save, persist method in hibernate does?
+. What is get and load method in hiberated does?
+
+.
+
+. 
